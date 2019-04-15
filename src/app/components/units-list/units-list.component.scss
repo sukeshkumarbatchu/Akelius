@@ -1,0 +1,26 @@
+ul{
+    li{
+        padding-bottom: 3rem;
+        cursor: pointer;
+
+        &:first-child{
+            padding: 1.25rem 2rem;
+        }
+
+        figure{
+            margin: 0;
+
+            img{
+                width: 100%;
+            }
+
+            figcaption{
+                padding: 0 1.25rem;
+
+                h3, .fa{
+                    color: #01407c;
+                }
+            }
+        }
+    }
+}

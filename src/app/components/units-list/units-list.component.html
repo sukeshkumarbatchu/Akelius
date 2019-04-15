@@ -1,0 +1,53 @@
+<ul class="list-links">
+  <li>
+    <div>
+      
+      <label>Filter by City: </label>
+      <select (change)="navCityFilter($event.target.value)" [(ngModel)]="filterCity">
+        <option value="All">--Select City--</option>
+        <option *ngFor="let unit of unitsList | filterByAvailable:true" value={{unit.address.city}}>
+          {{unit.address.city}}
+        </option>
+      </select>
+    </div>
+    <br>
+    Total number of apartments: {{ (unitsList | filterByAvailable:false:filterCity:true)?.length }}
+    <br>
+    Number of available apartments: {{ (unitsList | filterByAvailable:false:filterCity)?.length }}
+    <br>
+  </li>
+  <li *ngFor="let unit of unitsList | filterByAvailable:false:filterCity" (click)="navUnitDetail(unit)">
+    <figure>
+      <img [src]="unit.teaserImageUrl || ''" alt="Letting Image">
+      <figcaption>
+        <h3> {{unit.title || ''}}</h3>
+        <p class="font-weight-bold">
+          {{unit.address?.streetName || ''}} &nbsp;
+          {{unit.address?.houseNumber || ''}} &nbsp;
+          {{unit.address?.postalCode || ''}} &nbsp;
+          {{unit.address?.city || ''}} &nbsp;
+          <br>
+          {{unit.address?.borough || ''}} &nbsp;
+        </p>
+
+        <p>
+          <span *ngIf="unit.details?.numberOfRooms"> {{unit.details?.numberOfRooms || ''}} &nbsp; Rooms
+            &nbsp;&nbsp;</span>
+          <span *ngIf="unit.details?.size"> {{unit.details?.size || ''}}
+            &nbsp;{{unit.localization?.areaUnit || ''}}</span>
+          <br>
+          <span *ngIf="unit.details?.floor"> floor&nbsp; {{unit.details?.floor || ''}} &nbsp;&nbsp;</span>
+          <span *ngIf="unit.details?.totalRent"> {{unit.details?.rent?.totalRent || ''}}
+            &nbsp;{{unit.localization?.currency || ''}}</span>
+          <br>
+        </p>
+
+        <div class="text-right">
+          <span class="fa fa-star fa-2x"></span>&nbsp;
+          <span class="fa fa-envelope fa-2x"></span>
+        </div>
+
+      </figcaption>
+    </figure>
+  </li>
+</ul>
